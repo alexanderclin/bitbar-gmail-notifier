@@ -1,5 +1,6 @@
 # Bitbar Gmail Notifier
 Bitbar plugin that displays recent emails and notifies on new messages.
+Uses oauth2, which avoids the "less secure apps" problem when using basic auth.
 
 ## Dependencies
 - `realpath`
