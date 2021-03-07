@@ -1,11 +1,12 @@
-from __future__ import print_function
-import pickle
 import os
 import os.path
+import pickle
 import time
-from googleapiclient.discovery import build
-from google_auth_oauthlib.flow import InstalledAppFlow
+from datetime import datetime
+
 from google.auth.transport.requests import Request
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
 
 ################################################################################
 # START CONFIG
@@ -110,15 +111,19 @@ def main():
             snippet = snippet.replace("|", "￨")
 
             # Notify if needed
+            email_timestamp = int(int(email["internalDate"]) / 1000)
             if (
                 SHOW_NOTIFICATIONS
-                and int(time.time()) - int(int(email["internalDate"]) / 1000)
-                <= NOTIFICATION_THRESHOLD_SECONDS
+                and int(time.time()) - email_timestamp <= NOTIFICATION_THRESHOLD_SECONDS
             ):
                 notify(snippet, subject_header, from_header)
 
+            # Print out emails
+            email_formatted_time = datetime.fromtimestamp(email_timestamp).strftime(
+                "%b %d"
+            )
             print(f"{subject_header} | length=50 href={link}")
-            print(f"--{from_header} | href={link}")
+            print(f"--{from_header} ￨ {email_formatted_time} | href={link}")
             print(f"--{subject_header} | href={link}")
             print(f"-----")
             print(f"--{snippet} | length=50 href={link}")

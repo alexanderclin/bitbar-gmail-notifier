@@ -1,5 +1,6 @@
 # Bitbar Gmail Notifier
-Bitbar plugin that displays recent emails and notifies on new messages.
+Bitbar plugin that displays recent emails and notifies on new messages. You can also click on entries to go to the email in your browser.
+
 Uses oauth2, which avoids the "less secure apps" problem when using basic auth.
 
 ## Dependencies
