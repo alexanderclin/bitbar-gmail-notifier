@@ -1,0 +1,1 @@
+Put `credentials.json` in this directory
