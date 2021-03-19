@@ -47,6 +47,11 @@ def notify(display, title, subtitle):
     )
 
 
+# Replace "|" and "-" with similar looking characters.
+def sanitize(string):
+    return string.replace("|", "￨").replace("-", "−")
+
+
 def main():
     print("✉")
     print("---")
@@ -106,9 +111,9 @@ def main():
             snippet = f'{email["snippet"]}'
 
             # Sanitize
-            from_header = from_header.replace("|", "￨")
-            subject_header = subject_header.replace("|", "￨")
-            snippet = snippet.replace("|", "￨")
+            from_header = sanitize(from_header)
+            subject_header = sanitize(subject_header)
+            snippet = sanitize(snippet)
 
             # Notify if needed
             email_timestamp = int(int(email["internalDate"]) / 1000)
@@ -122,10 +127,12 @@ def main():
             email_formatted_time = datetime.fromtimestamp(email_timestamp).strftime(
                 "%b %d"
             )
-            print(f"{subject_header} | length=50 href={link}")
+            print(
+                f"{email_formatted_time} ￨ {subject_header} | length=50 href={link} font=Monaco"
+            )
             print(f"--{from_header} ￨ {email_formatted_time} | href={link}")
-            print(f"--{subject_header} | href={link}")
-            print(f"-----")
+            print(f"--{subject_header} | length=50 href={link}")
+            print("-----")
             print(f"--{snippet} | length=50 href={link}")
 
         for message_id in messages:
@@ -136,7 +143,7 @@ def main():
 
         batch.execute()
 
-    print(f"---")
+    print("---")
     print(f"Refresh | refresh=true")
 
 
