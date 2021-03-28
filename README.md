@@ -16,5 +16,9 @@ Uses oauth2, which avoids the "less secure apps" problem when using basic auth.
     - Otherwise manually create a project and save credentials
 6. Symlink `bitbar-gmail-notifier.30s.sh` into your bitbar plugins folder.
 
+## Running the Plugin
+1. Add `config.json` to the secrets folder (default `bitbar-gmail-notifier-secrets`). Formatting details are in `bitbar-gmail-notifier-impl.py`
+2. When the plugin first start it will open Sign In pages for each user you added. Make sure to sign in with the same order as what you have in `config.json`
+
 ## Config
 - Config is in `bitbar-gmail-notifier-impl.py`.
