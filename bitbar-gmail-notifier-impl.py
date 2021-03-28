@@ -76,6 +76,7 @@ def get_service(user):
                 os.path.join(SECRETS_DIRECTORY, "credentials.json"),
                 SCOPES,
             )
+            notify(f"Login with {user}", "Bitbar Gmail Notifier", "")
             creds = flow.run_local_server(
                 port=0, authorization_prompt_message="", open_browser=True
             )
